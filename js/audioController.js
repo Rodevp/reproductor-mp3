@@ -2,11 +2,29 @@ const play = (audio) => audio.play()
 
 const pause = (audio) => {
     
-    console.log(audio, 'is pause? -> ', audio.paused)
+    if (audio.paused === false) audio.pause()
 
-    if (audio.paused === false) {
-        console.log('entre -> ', audio)
-        audio.paused = true
+}
+
+const next = (list, current, currentAudio) => {
+
+    const indexCurrent = list.indexOf(current)
+
+    if ( list[list.length - 1] === current ) {
+        pause(currentAudio)
+
+        const audio = new Audio(list[0])
+        audio.play()
+
+    }
+
+    if ( list[list.length - 1] !== current ) {
+        
+        pause(currentAudio)
+
+        const nextAudio = new Audio(list[indexCurrent + 1])
+        nextAudio.play()
+
     }
 
 }
@@ -14,5 +32,6 @@ const pause = (audio) => {
 
 export {
     play,
-    pause
+    pause,
+    next
 }
