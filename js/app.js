@@ -19,6 +19,7 @@ const nextAudio = document.getElementById('next_audio')
 const prevAudio = document.getElementById('arrow__prev')
 const nameSound = document.getElementById('showNameSound')
 const volumeControl = document.getElementById('volume')
+const disk = document.getElementById('disk')
 const currentAudio = globalAudio(listAudios)
 
 playing.addEventListener('click', e => {
@@ -31,6 +32,7 @@ playing.addEventListener('click', e => {
                 ? listAudios[listAudios.indexOf(localStorage.getItem('currentAudio')) ]
                 : listAudios[0]
         )
+        disk.classList.remove('diks__image')
         
     } else {
         play(currentAudio)
@@ -40,6 +42,7 @@ playing.addEventListener('click', e => {
                 : listAudios[0]
         )
             showNameSound(nameSound, localStorage.getItem('currentAudio'))
+            disk.classList.add('diks__image')
     }
     
 })
