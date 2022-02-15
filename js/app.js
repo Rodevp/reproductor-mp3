@@ -1,3 +1,4 @@
+import { globalAudio } from './audio.js'
 import {
     play,
     pause,
@@ -11,22 +12,41 @@ const listAudios = [
     './audio/boca_yo_te_amo.mp3'
 ]
 
-const initialAudio = new Audio('./audio/boca_yo_te_amo.mp3')
+
+
 const playing = document.getElementById('playing')
 const nextAudio = document.getElementById('next_audio')
 const prevAudio = document.getElementById('arrow__prev')
+const currentAudio = globalAudio()
+currentAudio.src = localStorage.getItem('currentAudio') !== null
+                        ? listAudios[listAudios.indexOf('currentAudio') ]
+                        : listAudios[0]
+
+console.log(localStorage.getItem('currentAudio'), currentAudio)
 
 playing.addEventListener('click', e => {
+    
+    if (!currentAudio.paused) {
+        pause(currentAudio)
+    }
 
-    play(initialAudio)
+    if (currentAudio.paused) {
+        play(currentAudio)
+        localStorage.setItem('currentAudio', 
+            localStorage.getItem('currentAudio') !== null
+                ? listAudios[listAudios.indexOf('currentAudio') ]
+                : listAudios[0]
+        )
+
+    }
 
 })
 
 nextAudio.addEventListener('click', e => {
-    next(listAudios, './audio/thanos.mp3', initialAudio)
+    next(listAudios, localStorage.getItem('currentAudio'), currentAudio)
 })
 
 prevAudio.addEventListener('click', e => {
-    prev(listAudios, './audio/boca_yo_te_amo.mp3', initialAudio)
+    prev(listAudios, localStorage.getItem('currentAudio'), currentAudio)
 })
 
