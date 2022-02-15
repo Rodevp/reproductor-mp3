@@ -18,6 +18,7 @@ const playing = document.getElementById('playing')
 const nextAudio = document.getElementById('next_audio')
 const prevAudio = document.getElementById('arrow__prev')
 const nameSound = document.getElementById('showNameSound')
+const volumeControl = document.getElementById('volume')
 const currentAudio = globalAudio(listAudios)
 
 playing.addEventListener('click', e => {
@@ -51,8 +52,11 @@ prevAudio.addEventListener('click', e => {
     prev(listAudios, localStorage.getItem('currentAudio'), currentAudio)
 })
 
+volumeControl.addEventListener('click', e => {
+    currentAudio.volume = e.target.value
+})
+
 nameSound.textContent = localStorage.getItem('currentAudio') !== null 
                                 ? localStorage.getItem('currentAudio').split('/')[2]
                                 : 'No habido reproducción'
 
-console.log(localStorage.getItem('currentAudio'), currentAudio)
