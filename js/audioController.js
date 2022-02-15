@@ -38,8 +38,8 @@ const prev = (list, current, currentAudio) => {
     if ( current === list[0] ) {
         pause(currentAudio)
 
-        const audio = new Audio(list[list.length - 1])
-        audio.play()
+        currentAudio.src = list[list.length - 1]
+        play(currentAudio)
         localStorage.setItem('currentAudio', list[list.length - 1])
     }
 
@@ -47,8 +47,8 @@ const prev = (list, current, currentAudio) => {
         
         pause(currentAudio)
 
-        const nextAudio = new Audio(list[indexCurrent - 1])
-        nextAudio.play()
+        currentAudio.src = list[indexCurrent - 1]
+        play(currentAudio)
         localStorage.setItem('currentAudio', list[indexCurrent - 1])
 
     }
