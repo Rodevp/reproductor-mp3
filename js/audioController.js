@@ -29,9 +29,33 @@ const next = (list, current, currentAudio) => {
 
 }
 
+const prev = (list, current, currentAudio) => {
+
+    const indexCurrent = list.indexOf(current)
+
+    if ( current === list[0] ) {
+        pause(currentAudio)
+
+        const audio = new Audio(list[list.length - 1])
+        audio.play()
+
+    }
+
+    if (  current !== list[0] ) {
+        
+        pause(currentAudio)
+
+        const nextAudio = new Audio(list[indexCurrent - 1])
+        nextAudio.play()
+
+    }
+
+}
+
 
 export {
     play,
     pause,
-    next
+    next,
+    prev
 }
