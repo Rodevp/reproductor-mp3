@@ -14,6 +14,22 @@ const listAudios = [
     './audio/soltero.mp3'
 ]
 
+const BOCA_COLORS = {
+    primray: '#010665',
+    second: '#000B84'
+}
+
+const THANOS_COLORS = {
+    primray: '#3D0264',
+    second: '#3F0473'
+}
+
+const SINGLE_COLORS = {
+    primray: '#037A56',
+    second: '#03732E'
+}
+
+
 const playing = document.getElementById('playing')
 const nextAudio = document.getElementById('next_audio')
 const prevAudio = document.getElementById('arrow__prev')
