@@ -2,17 +2,14 @@ const play = (audio) => audio.play()
 
 const pause = (audio) => {
     
-    if (!audio.paused) {
-        audio.paused()
-    }
+    console.log(audio, 'is pause? -> ', audio.paused)
 
-    if (audio.paused) {
-        play(audio)
+    if (audio.paused === false) {
+        console.log('entre -> ', audio)
+        audio.paused = true
     }
 
 }
-
-
 
 
 export {

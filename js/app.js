@@ -1,5 +1,19 @@
-const volume = document.getElementById('volume')
+import {
+    play,
+    pause
+} from './audioController.js'
 
-volume.addEventListener('change', e => {
-    console.log(e.target.value)
+
+
+
+const audio = new Audio('./audio/thanos.mp3')
+const playing = document.getElementById('playing')
+
+playing.addEventListener('click', e => {
+    console.log('click')
+    play(audio)
 })
+
+setInterval(() => {
+    pause(audio)
+}, 4000)
