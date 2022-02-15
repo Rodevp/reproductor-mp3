@@ -15,16 +15,19 @@ const listAudios = [
 ]
 
 const BOCA_COLORS = {
+    whatColor: 'boca',
     primray: '#010665',
     second: '#000B84'
 }
 
 const THANOS_COLORS = {
+    whatColor: 'thanos',
     primray: '#3D0264',
     second: '#3F0473'
 }
 
 const SINGLE_COLORS = {
+    whatColor: 'single',
     primray: '#037A56',
     second: '#03732E'
 }
@@ -36,46 +39,99 @@ const prevAudio = document.getElementById('arrow__prev')
 const nameSound = document.getElementById('showNameSound')
 const volumeControl = document.getElementById('volume')
 const disk = document.getElementById('disk')
+const allBars = document.querySelectorAll('.bar')
 const currentAudio = globalAudio(listAudios)
 
-playing.addEventListener('click', e => {
+
+const validColorsChangeBars = (bars) => {
+    const colorResult = localStorage.getItem('currentAudio') === listAudios[0]
+                            ? THANOS_COLORS
+                            : localStorage.getItem('currentAudio') === listAudios[1]
+                            ? BOCA_COLORS
+                            : SINGLE_COLORS
     
+    for (let bar of bars) {
+        if (bars.indexOf(bar) % 2 === 0) {
+            bar.style.backgroundColor = `${colorResult.primray}`
+        } else {
+            bar.style.backgroundColor = `${colorResult.second}`
+        }
+    }
+
+}
+
+const moveBars = (bars = []) => {
+
+    for (let bar of bars) {
+        console.log(bar)
+        if (bars.indexOf(bar) % 2 === 0) {
+            bar.classList.add('bar-even')
+        } else {
+            bar.classList.add('bar--odds')
+        }
+    }
+
+}
+
+const stopBars = (bars = []) => {
+    
+    for (let bar of bars) {
+        console.log(bar)
+        if (bars.indexOf(bar) % 2 === 0) {
+            bar.classList.remove('bar-even')
+        } else {
+            bar.classList.remove('bar--odds')
+        }
+    }
+
+}
+
+
+playing.addEventListener('click', e => {
+
     if (!currentAudio.paused) {
         pause(currentAudio)
-        
-        localStorage.setItem('currentAudio', 
+
+        localStorage.setItem('currentAudio',
             localStorage.getItem('currentAudio') !== null
-                ? listAudios[listAudios.indexOf(localStorage.getItem('currentAudio')) ]
+                ? listAudios[listAudios.indexOf(localStorage.getItem('currentAudio'))]
                 : listAudios[0]
         )
         disk.classList.remove('diks__image')
-        
+        stopBars([...allBars])
+
     } else {
+
         play(currentAudio)
-        localStorage.setItem('currentAudio', 
+        localStorage.setItem('currentAudio',
             localStorage.getItem('currentAudio') !== null
-                ? listAudios[listAudios.indexOf(localStorage.getItem('currentAudio')) ]
+                ? listAudios[listAudios.indexOf(localStorage.getItem('currentAudio'))]
                 : listAudios[0]
         )
-            showNameSound(nameSound, localStorage.getItem('currentAudio'))
-            disk.classList.add('diks__image')
+        showNameSound(nameSound, localStorage.getItem('currentAudio'))
+        disk.classList.add('diks__image')
+        moveBars([...allBars])
+        validColorsChangeBars([...allBars])
+
     }
-    
+
 })
 
 nextAudio.addEventListener('click', e => {
     next(listAudios, localStorage.getItem('currentAudio'), currentAudio)
+    validColorsChangeBars([...allBars])
 })
 
 prevAudio.addEventListener('click', e => {
     prev(listAudios, localStorage.getItem('currentAudio'), currentAudio)
+    validColorsChangeBars([...allBars])
 })
 
 volumeControl.addEventListener('click', e => {
     currentAudio.volume = e.target.value
 })
 
-nameSound.textContent = localStorage.getItem('currentAudio') !== null 
-                                ? localStorage.getItem('currentAudio').split('/')[2]
-                                : 'No habido reproducción'
+nameSound.textContent = localStorage.getItem('currentAudio') !== null
+    ? localStorage.getItem('currentAudio').split('/')[2]
+    : 'No habido reproducción'
 
