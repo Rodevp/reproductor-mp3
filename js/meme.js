@@ -1,0 +1,7 @@
+const validateShowMeme = () => {
+
+}
+
+export {
+    validateShowMeme
+}

@@ -57,7 +57,6 @@ const validColorsChangeBars = (bars) => {
 const moveBars = (bars = []) => {
 
     for (let bar of bars) {
-        console.log(bar)
         if (bars.indexOf(bar) % 2 === 0) {
             bar.classList.add('bar-even')
         } else {
@@ -70,7 +69,6 @@ const moveBars = (bars = []) => {
 const stopBars = (bars = []) => {
     
     for (let bar of bars) {
-        console.log(bar)
         if (bars.indexOf(bar) % 2 === 0) {
             bar.classList.remove('bar-even')
         } else {
@@ -128,4 +126,3 @@ volumeControl.addEventListener('click', e => {
 nameSound.textContent = localStorage.getItem('currentAudio') !== null
     ? localStorage.getItem('currentAudio').split('/')[2]
     : 'No habido reproducción'
-
