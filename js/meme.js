@@ -1,10 +1,3 @@
-const listAudios = [
-    './audio/thanos.mp3',
-    './audio/boca_yo_te_amo.mp3',
-    './audio/soltero.mp3'
-]
-
-
 const validateShowMeme = (currentSound, sound, renderToImage) => {
     console.log(
 

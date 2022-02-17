@@ -132,3 +132,6 @@ nameSound.textContent = localStorage.getItem('currentAudio') !== null
     : 'No habido reproducción'
 
 
+setInterval(() => {
+    currentAudio.paused && imgMeme.classList.remove('animation__image')
+}, 1000)
