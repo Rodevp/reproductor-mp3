@@ -7,7 +7,6 @@ import {
     showNameSound
 } from './audioController.js'
 
-
 const listAudios = [
     './audio/thanos.mp3',
     './audio/boca_yo_te_amo.mp3',
@@ -15,23 +14,19 @@ const listAudios = [
 ]
 
 const BOCA_COLORS = {
-    whatColor: 'boca',
     primray: '#010665',
     second: '#000B84'
 }
 
 const THANOS_COLORS = {
-    whatColor: 'thanos',
     primray: '#3D0264',
     second: '#3F0473'
 }
 
 const SINGLE_COLORS = {
-    whatColor: 'single',
     primray: '#037A56',
     second: '#03732E'
 }
-
 
 const playing = document.getElementById('playing')
 const nextAudio = document.getElementById('next_audio')
@@ -41,7 +36,6 @@ const volumeControl = document.getElementById('volume')
 const disk = document.getElementById('disk')
 const allBars = document.querySelectorAll('.bar')
 const currentAudio = globalAudio(listAudios)
-
 
 const validColorsChangeBars = (bars) => {
     const colorResult = localStorage.getItem('currentAudio') === listAudios[0]
