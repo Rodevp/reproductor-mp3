@@ -6,6 +6,7 @@ import {
     prev,
     showNameSound
 } from './audioController.js'
+import { validateShowMeme } from './meme.js'
 
 const listAudios = [
     './audio/thanos.mp3',
@@ -35,6 +36,7 @@ const nameSound = document.getElementById('showNameSound')
 const volumeControl = document.getElementById('volume')
 const disk = document.getElementById('disk')
 const allBars = document.querySelectorAll('.bar')
+const imgMeme = document.getElementById('memeImage')
 const currentAudio = globalAudio(listAudios)
 
 const validColorsChangeBars = (bars) => {
@@ -104,7 +106,7 @@ playing.addEventListener('click', e => {
         disk.classList.add('diks__image')
         moveBars([...allBars])
         validColorsChangeBars([...allBars])
-
+        validateShowMeme(localStorage.getItem('currentAudio'), currentAudio, imgMeme)
     }
 
 })
@@ -112,11 +114,13 @@ playing.addEventListener('click', e => {
 nextAudio.addEventListener('click', e => {
     next(listAudios, localStorage.getItem('currentAudio'), currentAudio)
     validColorsChangeBars([...allBars])
+    validateShowMeme(localStorage.getItem('currentAudio'), currentAudio, imgMeme)
 })
 
 prevAudio.addEventListener('click', e => {
     prev(listAudios, localStorage.getItem('currentAudio'), currentAudio)
     validColorsChangeBars([...allBars])
+    validateShowMeme(localStorage.getItem('currentAudio'), currentAudio, imgMeme)
 })
 
 volumeControl.addEventListener('click', e => {
@@ -126,3 +130,5 @@ volumeControl.addEventListener('click', e => {
 nameSound.textContent = localStorage.getItem('currentAudio') !== null
     ? localStorage.getItem('currentAudio').split('/')[2]
     : 'No habido reproducción'
+
+
